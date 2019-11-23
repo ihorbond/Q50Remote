@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Q50Remote.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid BackgroundColor="Black">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.8*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Image
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Source="Q50" />
+
+        <Button
+            Grid.Row="1"
+            Grid.Column="0"
+            BackgroundColor="DeepSkyBlue"
+            BorderColor="Black"
+            BorderWidth="1"
+            Command="{Binding SendCarCommand}"
+            CommandParameter="1"
+            Text="Lock" />
+        <Button
+            Grid.Row="1"
+            Grid.Column="1"
+            BackgroundColor="DeepSkyBlue"
+            BorderColor="Black"
+            BorderWidth="1"
+            Command="{Binding SendCarCommand}"
+            CommandParameter="2"
+            Text="Unlock" />
+        <Button
+            Grid.Row="2"
+            Grid.Column="0"
+            BackgroundColor="DeepSkyBlue"
+            BorderColor="Black"
+            BorderWidth="1"
+            Command="{Binding SendCarCommand}"
+            CommandParameter="3"
+            Text="Trunk" />
+        <Button
+            Grid.Row="2"
+            Grid.Column="1"
+            BackgroundColor="Red"
+            BorderColor="Black"
+            BorderWidth="1"
+            Command="{Binding SendCarCommand}"
+            CommandParameter="4"
+            Text="Alarm" />
+        <Button
+            Grid.Row="3"
+            Grid.Column="0"
+            BackgroundColor="DeepSkyBlue"
+            BorderColor="Black"
+            BorderWidth="1"
+            Command="{Binding SendCarCommand}"
+            CommandParameter="5"
+            Text="Windows" />
+        <Button
+            Grid.Row="3"
+            Grid.Column="1"
+            BackgroundColor="DeepSkyBlue"
+            BorderColor="Black"
+            BorderWidth="1"
+            Command="{Binding SendCarCommand}"
+            CommandParameter="6"
+            Text="Location" />
+
+    </Grid>
+
+</ContentPage>
