@@ -4,8 +4,14 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:enums="clr-namespace:Q50Remote.Enums"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vms="clr-namespace:Q50Remote.ViewModels"
     mc:Ignorable="d">
+
+    <ContentPage.BindingContext>
+        <vms:MainPageViewModel />
+    </ContentPage.BindingContext>
 
     <Grid BackgroundColor="Black">
         <Grid.ColumnDefinitions>
@@ -32,7 +38,8 @@
             BorderColor="Black"
             BorderWidth="1"
             Command="{Binding SendCarCommand}"
-            CommandParameter="1"
+            CommandParameter="{x:Static enums:CarCommandEnum.Lock}"
+            IsEnabled="{Binding CarCommandNotRunning}"
             Text="Lock" />
         <Button
             Grid.Row="1"
@@ -41,7 +48,8 @@
             BorderColor="Black"
             BorderWidth="1"
             Command="{Binding SendCarCommand}"
-            CommandParameter="2"
+            CommandParameter="{x:Static enums:CarCommandEnum.Unlock}"
+            IsEnabled="{Binding CarCommandNotRunning}"
             Text="Unlock" />
         <Button
             Grid.Row="2"
@@ -50,7 +58,8 @@
             BorderColor="Black"
             BorderWidth="1"
             Command="{Binding SendCarCommand}"
-            CommandParameter="3"
+            CommandParameter="{x:Static enums:CarCommandEnum.Trunk}"
+            IsEnabled="{Binding CarCommandNotRunning}"
             Text="Trunk" />
         <Button
             Grid.Row="2"
@@ -59,7 +68,8 @@
             BorderColor="Black"
             BorderWidth="1"
             Command="{Binding SendCarCommand}"
-            CommandParameter="4"
+            CommandParameter="{x:Static enums:CarCommandEnum.Alarm}"
+            IsEnabled="{Binding CarCommandNotRunning}"
             Text="Alarm" />
         <Button
             Grid.Row="3"
@@ -68,7 +78,8 @@
             BorderColor="Black"
             BorderWidth="1"
             Command="{Binding SendCarCommand}"
-            CommandParameter="5"
+            CommandParameter="{x:Static enums:CarCommandEnum.Windows}"
+            IsEnabled="{Binding CarCommandNotRunning}"
             Text="Windows" />
         <Button
             Grid.Row="3"
@@ -77,8 +88,12 @@
             BorderColor="Black"
             BorderWidth="1"
             Command="{Binding SendCarCommand}"
-            CommandParameter="6"
+            CommandParameter="{x:Static enums:CarCommandEnum.Location}"
+            IsEnabled="{Binding CarCommandNotRunning}"
             Text="Location" />
+
+        <ActivityIndicator IsRunning="{Binding CarCommandNotRunning}" Color="Gold" />
+
 
     </Grid>
 
