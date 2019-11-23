@@ -24,6 +24,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Image
@@ -41,7 +42,7 @@
             Command="{Binding SendCarCommand}"
             CommandParameter="{x:Static enums:CarCommandEnum.Lock}"
             IsEnabled="{Binding IsCarCommandRunning, Converter={converters:InverseBoolConverter}}"
-            IsVisible="{Binding IsCarCommandRunning, Converter={converters:InverseBoolConverter}}"
+            IsVisible="{Binding IsLockTileVisible}"
             Text="Lock" />
         <Button
             x:Name="UnlockBtn"
@@ -53,6 +54,7 @@
             Command="{Binding SendCarCommand}"
             CommandParameter="{x:Static enums:CarCommandEnum.Unlock}"
             IsEnabled="{Binding IsCarCommandRunning, Converter={converters:InverseBoolConverter}}"
+            IsVisible="{Binding IsUnlockTileVisible}"
             Text="Unlock" />
         <Button
             Grid.Row="2"
@@ -63,6 +65,7 @@
             Command="{Binding SendCarCommand}"
             CommandParameter="{x:Static enums:CarCommandEnum.Trunk}"
             IsEnabled="{Binding IsCarCommandRunning, Converter={converters:InverseBoolConverter}}"
+            IsVisible="{Binding IsTrunkTileVisible}"
             Text="Trunk" />
         <Button
             Grid.Row="2"
@@ -73,6 +76,7 @@
             Command="{Binding SendCarCommand}"
             CommandParameter="{x:Static enums:CarCommandEnum.Alarm}"
             IsEnabled="{Binding IsCarCommandRunning, Converter={converters:InverseBoolConverter}}"
+            IsVisible="{Binding IsAlarmTileVisible}"
             Text="Alarm" />
         <Button
             Grid.Row="3"
@@ -83,6 +87,7 @@
             Command="{Binding SendCarCommand}"
             CommandParameter="{x:Static enums:CarCommandEnum.Windows}"
             IsEnabled="{Binding IsCarCommandRunning, Converter={converters:InverseBoolConverter}}"
+            IsVisible="{Binding IsWindowsTileVisible}"
             Text="Windows" />
         <Button
             Grid.Row="3"
@@ -91,18 +96,20 @@
             BorderColor="Black"
             BorderWidth="1"
             Command="{Binding ShowCarLocation}"
+            IsVisible="{Binding IsLocationTileVisible}"
             Text="Location" />
         <Button
             Grid.Row="4"
-            Grid.Column="1"
+            Grid.Column="0"
             BackgroundColor="DeepSkyBlue"
             BorderColor="Black"
             BorderWidth="1"
             Command="{Binding ShowAutoPIPortal}"
+            IsVisible="{Binding IsAutoPiTileVisible}"
             Text="AutoPI" />
         <Button
             Grid.Row="4"
-            Grid.Column="2"
+            Grid.Column="1"
             BackgroundColor="DeepSkyBlue"
             BorderColor="Black"
             BorderWidth="1"

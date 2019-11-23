@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Q50Remote.Views.Settings"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vms="clr-namespace:Q50Remote.ViewModels"
+    xmlns:converters="clr-namespace:Q50Remote.Converters"
+    mc:Ignorable="d">
+
+    <ContentPage.BindingContext>
+        <vms:SettingsPageViewModel />
+    </ContentPage.BindingContext>
+
+    <TableView Intent="Settings">
+        <TableRoot>
+            <TableSection Title="Menu Tiles" TextColor="DeepSkyBlue">
+                <SwitchCell On="{Binding IsLockTileVisible, Mode=TwoWay}" Text="Lock" />
+                <SwitchCell On="{Binding IsUnlockTileVisible, Mode=TwoWay}" Text="Unlock" />
+                <SwitchCell On="{Binding IsTrunkTileVisible, Mode=TwoWay}" Text="Trunk" />
+                <SwitchCell On="{Binding IsAlarmTileVisible, Mode=TwoWay}" Text="Alarm" />
+                <SwitchCell On="{Binding IsWindowsTileVisible, Mode=TwoWay}" Text="Windows" />
+                <SwitchCell On="{Binding IsLocationTileVisible, Mode=TwoWay}" Text="Location" />
+                <SwitchCell On="{Binding IsAutoPiTileVisible, Mode=TwoWay}" Text="AutoPI" />
+            </TableSection>
+        </TableRoot>
+    </TableView>
+
+</ContentPage>

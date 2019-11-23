@@ -1,19 +1,20 @@
 ﻿using Q50Remote.Enums;
 using Q50Remote.Models;
 using Q50Remote.Services;
+using Q50Remote.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Q50Remote.ViewModels
 {
-    public class MainPageViewModel : INotifyPropertyChanged
+    public class MainPageViewModel : SettingsPageBaseViewModel
     {
-        public event PropertyChangedEventHandler PropertyChanged;
         private bool _isCarCommandRunning = false;
         public bool IsCarCommandRunning
         {
@@ -21,7 +22,7 @@ namespace Q50Remote.ViewModels
             set
             {
                 _isCarCommandRunning = value;
-                OnPropertyChanged(nameof(IsCarCommandRunning));
+                OnPropertyChanged();
             }
         }
 
@@ -32,7 +33,7 @@ namespace Q50Remote.ViewModels
             set
             {
                 _actIndRow = value;
-                OnPropertyChanged(nameof(ActIndRow));
+                OnPropertyChanged();
             }
         }
 
@@ -43,7 +44,7 @@ namespace Q50Remote.ViewModels
             set
             {
                 _actIndCol = value;
-                OnPropertyChanged(nameof(ActIndCol));
+                OnPropertyChanged();
             }
         }
 
@@ -82,15 +83,12 @@ namespace Q50Remote.ViewModels
 
             });
 
-            ShowSettings = new Command(() =>
+            ShowSettings = new Command(async() =>
             {
                 Debug.WriteLine("Show settings");
+                await Application.Current.MainPage.Navigation.PushAsync(new Settings(), true);
             });
         }
 
-        protected virtual void OnPropertyChanged(string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

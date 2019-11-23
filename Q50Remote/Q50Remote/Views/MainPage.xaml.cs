@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Q50Remote.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -16,6 +17,17 @@ namespace Q50Remote
         public MainPage()
         {
             InitializeComponent();
+            
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            //reattaching view model to trigger one way binding to refresh
+            MainPageViewModel vm = new MainPageViewModel();
+            BindingContext = vm;
+        }
+
     }
 }
