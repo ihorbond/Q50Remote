@@ -10,7 +10,6 @@ namespace Q50Remote.Enums
         Unlock = 2,
         Trunk = 3,
         Alarm = 4,
-        Windows = 5,
-        Location = 6
+        Windows = 5
     }
 }

@@ -3,6 +3,7 @@
     x:Class="Q50Remote.MainPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:Q50Remote.Converters"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:enums="clr-namespace:Q50Remote.Enums"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -39,9 +40,11 @@
             BorderWidth="1"
             Command="{Binding SendCarCommand}"
             CommandParameter="{x:Static enums:CarCommandEnum.Lock}"
-            IsEnabled="{Binding CarCommandNotRunning}"
+            IsEnabled="{Binding IsCarCommandRunning, Converter={converters:InverseBoolConverter}}"
+            IsVisible="{Binding IsCarCommandRunning, Converter={converters:InverseBoolConverter}}"
             Text="Lock" />
         <Button
+            x:Name="UnlockBtn"
             Grid.Row="1"
             Grid.Column="1"
             BackgroundColor="DeepSkyBlue"
@@ -49,7 +52,7 @@
             BorderWidth="1"
             Command="{Binding SendCarCommand}"
             CommandParameter="{x:Static enums:CarCommandEnum.Unlock}"
-            IsEnabled="{Binding CarCommandNotRunning}"
+            IsEnabled="{Binding IsCarCommandRunning, Converter={converters:InverseBoolConverter}}"
             Text="Unlock" />
         <Button
             Grid.Row="2"
@@ -59,7 +62,7 @@
             BorderWidth="1"
             Command="{Binding SendCarCommand}"
             CommandParameter="{x:Static enums:CarCommandEnum.Trunk}"
-            IsEnabled="{Binding CarCommandNotRunning}"
+            IsEnabled="{Binding IsCarCommandRunning, Converter={converters:InverseBoolConverter}}"
             Text="Trunk" />
         <Button
             Grid.Row="2"
@@ -69,7 +72,7 @@
             BorderWidth="1"
             Command="{Binding SendCarCommand}"
             CommandParameter="{x:Static enums:CarCommandEnum.Alarm}"
-            IsEnabled="{Binding CarCommandNotRunning}"
+            IsEnabled="{Binding IsCarCommandRunning, Converter={converters:InverseBoolConverter}}"
             Text="Alarm" />
         <Button
             Grid.Row="3"
@@ -79,7 +82,7 @@
             BorderWidth="1"
             Command="{Binding SendCarCommand}"
             CommandParameter="{x:Static enums:CarCommandEnum.Windows}"
-            IsEnabled="{Binding CarCommandNotRunning}"
+            IsEnabled="{Binding IsCarCommandRunning, Converter={converters:InverseBoolConverter}}"
             Text="Windows" />
         <Button
             Grid.Row="3"
@@ -87,13 +90,30 @@
             BackgroundColor="DeepSkyBlue"
             BorderColor="Black"
             BorderWidth="1"
-            Command="{Binding SendCarCommand}"
-            CommandParameter="{x:Static enums:CarCommandEnum.Location}"
-            IsEnabled="{Binding CarCommandNotRunning}"
+            Command="{Binding ShowCarLocation}"
             Text="Location" />
+        <Button
+            Grid.Row="4"
+            Grid.Column="1"
+            BackgroundColor="DeepSkyBlue"
+            BorderColor="Black"
+            BorderWidth="1"
+            Command="{Binding ShowAutoPIPortal}"
+            Text="AutoPI" />
+        <Button
+            Grid.Row="4"
+            Grid.Column="2"
+            BackgroundColor="DeepSkyBlue"
+            BorderColor="Black"
+            BorderWidth="1"
+            Command="{Binding ShowSettings}"
+            Text="Settings" />
 
-        <ActivityIndicator IsRunning="{Binding CarCommandNotRunning}" Color="Gold" />
-
+        <ActivityIndicator
+            Grid.Row="{Binding ActIndRow}"
+            Grid.Column="{Binding ActIndCol}"
+            IsRunning="{Binding IsCarCommandRunning}"
+            Color="Gold" />
 
     </Grid>
 

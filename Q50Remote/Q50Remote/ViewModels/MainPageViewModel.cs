@@ -1,4 +1,5 @@
 ﻿using Q50Remote.Enums;
+using Q50Remote.Models;
 using Q50Remote.Services;
 using System;
 using System.Collections.Generic;
@@ -13,17 +14,43 @@ namespace Q50Remote.ViewModels
     public class MainPageViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private bool _carCommandNotRunning = true;
-        public bool CarCommandNotRunning
+        private bool _isCarCommandRunning = false;
+        public bool IsCarCommandRunning
         {
-            get => _carCommandNotRunning;
+            get => _isCarCommandRunning;
             set
             {
-                _carCommandNotRunning = value;
-                OnPropertyChanged(nameof(CarCommandNotRunning));
+                _isCarCommandRunning = value;
+                OnPropertyChanged(nameof(IsCarCommandRunning));
             }
         }
+
+        private int _actIndRow;
+        public int ActIndRow
+        {
+            get => _actIndRow;
+            set
+            {
+                _actIndRow = value;
+                OnPropertyChanged(nameof(ActIndRow));
+            }
+        }
+
+        private int _actIndCol;
+        public int ActIndCol
+        {
+            get => _actIndCol;
+            set
+            {
+                _actIndCol = value;
+                OnPropertyChanged(nameof(ActIndCol));
+            }
+        }
+
         public Command<CarCommandEnum> SendCarCommand { get; }
+        public Command ShowCarLocation { get; }
+        public Command ShowAutoPIPortal { get; }
+        public Command ShowSettings { get; }
         private AutoPiService _autoPiService { get; }
 
         public MainPageViewModel()
@@ -32,8 +59,8 @@ namespace Q50Remote.ViewModels
 
             SendCarCommand = new Command<CarCommandEnum>(async(carCommand) =>
             {
-                CarCommandNotRunning = false;
-
+                IsCarCommandRunning = true;
+                
                 string name = Enum.GetName(typeof(CarCommandEnum), carCommand);
                 Debug.WriteLine(name);
 
@@ -41,7 +68,23 @@ namespace Q50Remote.ViewModels
 
                 Debug.WriteLine(name);
 
-                CarCommandNotRunning = true;
+                IsCarCommandRunning = false;
+            });
+
+            ShowCarLocation = new Command(() =>
+            {
+                Debug.WriteLine("Show location");
+            });
+
+            ShowAutoPIPortal = new Command(() =>
+            {
+                Debug.WriteLine("Show auto pi portal");
+
+            });
+
+            ShowSettings = new Command(() =>
+            {
+                Debug.WriteLine("Show settings");
             });
         }
 
