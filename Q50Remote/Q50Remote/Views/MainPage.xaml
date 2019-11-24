@@ -8,6 +8,7 @@
     xmlns:enums="clr-namespace:Q50Remote.Enums"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vms="clr-namespace:Q50Remote.ViewModels"
+    NavigationPage.HasNavigationBar="False"
     mc:Ignorable="d">
 
     <ContentPage.BindingContext>

@@ -10,7 +10,15 @@ namespace Q50Remote.ViewModels
     {
         public SettingsPageViewModel()
         {
+        }
 
+        public string AutoPiURL
+        {
+            get => Application.Current.Properties.ContainsKey(nameof(AutoPiURL))
+                ? (string)Application.Current.Properties[nameof(AutoPiURL)]
+                : "";
+
+            set => Application.Current.Properties[nameof(AutoPiURL)] = value;
         }
 
     }

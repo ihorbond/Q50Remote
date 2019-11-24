@@ -13,7 +13,7 @@ using Xamarin.Forms;
 
 namespace Q50Remote.ViewModels
 {
-    public class MainPageViewModel : SettingsPageBaseViewModel
+    public class MainPageViewModel : SettingsPageViewModel
     {
         private bool _isCarCommandRunning = false;
         public bool IsCarCommandRunning
@@ -77,9 +77,14 @@ namespace Q50Remote.ViewModels
                 Debug.WriteLine("Show location");
             });
 
-            ShowAutoPIPortal = new Command(() =>
+            ShowAutoPIPortal = new Command(async() =>
             {
                 Debug.WriteLine("Show auto pi portal");
+                string url = Application.Current.Properties.ContainsKey(nameof(AutoPiURL)) 
+                ? (string)Application.Current.Properties[(nameof(AutoPiURL))]
+                : "https://my.autopi.io/#/login";
+
+                await Application.Current.MainPage.Navigation.PushAsync(new WebViewPage(url));
 
             });
 

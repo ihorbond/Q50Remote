@@ -6,7 +6,6 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vms="clr-namespace:Q50Remote.ViewModels"
-    xmlns:converters="clr-namespace:Q50Remote.Converters"
     mc:Ignorable="d">
 
     <ContentPage.BindingContext>
@@ -23,6 +22,10 @@
                 <SwitchCell On="{Binding IsWindowsTileVisible, Mode=TwoWay}" Text="Windows" />
                 <SwitchCell On="{Binding IsLocationTileVisible, Mode=TwoWay}" Text="Location" />
                 <SwitchCell On="{Binding IsAutoPiTileVisible, Mode=TwoWay}" Text="AutoPI" />
+                <EntryCell
+                    Label="AutoPI URL"
+                    Placeholder="Enter URL"
+                    Text="{Binding AutoPiURL, Mode=TwoWay}" />
             </TableSection>
         </TableRoot>
     </TableView>
