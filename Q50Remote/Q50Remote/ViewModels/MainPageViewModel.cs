@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Q50Remote.ViewModels
@@ -72,9 +73,23 @@ namespace Q50Remote.ViewModels
                 IsCarCommandRunning = false;
             });
 
-            ShowCarLocation = new Command(() =>
+            ShowCarLocation = new Command(async() =>
             {
                 Debug.WriteLine("Show location");
+                if (Device.RuntimePlatform == Device.iOS)
+                {
+                    // https://developer.apple.com/library/ios/featuredarticles/iPhoneURLScheme_Reference/MapLinks/MapLinks.html
+                    await Launcher.OpenAsync("http://maps.apple.com/?q=394+Pacific+Ave+San+Francisco+CA");
+                }
+                else if (Device.RuntimePlatform == Device.Android)
+                {
+                    // open the maps app directly
+                    await Launcher.OpenAsync("geo:0,0?q=394+Pacific+Ave+San+Francisco+CA");
+                }
+                else if (Device.RuntimePlatform == Device.UWP)
+                {
+                    await Launcher.OpenAsync("bingmaps:?where=394 Pacific Ave San Francisco CA");
+                }
             });
 
             ShowAutoPIPortal = new Command(async() =>
