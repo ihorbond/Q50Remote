@@ -22,6 +22,8 @@
                 <SwitchCell On="{Binding IsWindowsTileVisible, Mode=TwoWay}" Text="Windows" />
                 <SwitchCell On="{Binding IsLocationTileVisible, Mode=TwoWay}" Text="Location" />
                 <SwitchCell On="{Binding IsAutoPiTileVisible, Mode=TwoWay}" Text="AutoPI" />
+            </TableSection>
+            <TableSection Title="Other" TextColor="DeepSkyBlue">
                 <EntryCell
                     Label="AutoPI URL"
                     Placeholder="Enter URL"

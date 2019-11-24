@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Q50Remote.ViewModels
@@ -16,50 +17,43 @@ namespace Q50Remote.ViewModels
 
         public bool IsLockTileVisible
         {
-            get => GetConfigValue();
-            set => Application.Current.Properties[nameof(IsLockTileVisible)] = value;
+            get => Preferences.Get(nameof(IsLockTileVisible), true);
+            set => Preferences.Set(nameof(IsLockTileVisible), value);
         }
         public bool IsUnlockTileVisible
         {
-            get => GetConfigValue();
-            set => Application.Current.Properties[nameof(IsUnlockTileVisible)] = value;
+            get => Preferences.Get(nameof(IsUnlockTileVisible), true);
+            set => Preferences.Set(nameof(IsUnlockTileVisible), value);
         }
         public bool IsTrunkTileVisible
         {
-            get => GetConfigValue();
-            set => Application.Current.Properties[nameof(IsTrunkTileVisible)] = value;
+            get => Preferences.Get(nameof(IsTrunkTileVisible), true);
+            set => Preferences.Set(nameof(IsTrunkTileVisible), value);
         }
         public bool IsAlarmTileVisible
         {
-            get => GetConfigValue();
-            set => Application.Current.Properties[nameof(IsAlarmTileVisible)] = value;
+            get => Preferences.Get(nameof(IsAlarmTileVisible), true);
+            set => Preferences.Set(nameof(IsAlarmTileVisible), value);
         }
         public bool IsWindowsTileVisible
         {
-            get => GetConfigValue();
-            set => Application.Current.Properties[nameof(IsWindowsTileVisible)] = value;
+            get => Preferences.Get(nameof(IsWindowsTileVisible), true);
+            set => Preferences.Set(nameof(IsWindowsTileVisible), value);
         }
         public bool IsLocationTileVisible
         {
-            get => GetConfigValue();
-            set => Application.Current.Properties[nameof(IsLocationTileVisible)] = value;
+            get => Preferences.Get(nameof(IsLocationTileVisible), true);
+            set => Preferences.Set(nameof(IsLocationTileVisible), value);
         }
         public bool IsAutoPiTileVisible
         {
-            get => GetConfigValue();
-            set => Application.Current.Properties[nameof(IsAutoPiTileVisible)] = value;
+            get => Preferences.Get(nameof(IsAutoPiTileVisible), true);
+            set => Preferences.Set(nameof(IsAutoPiTileVisible), value);
         }
-
-        /// <summary>
-        /// Return true by default
-        /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        private bool GetConfigValue([CallerMemberName]string key = "")
+        public string AutoPiURL
         {
-            return Application.Current.Properties.ContainsKey(key)
-                ? (bool)Application.Current.Properties[key]
-                : true;
+            get => Preferences.Get(nameof(AutoPiURL), null);
+            set => Preferences.Set(nameof(AutoPiURL), value);
         }
 
     }

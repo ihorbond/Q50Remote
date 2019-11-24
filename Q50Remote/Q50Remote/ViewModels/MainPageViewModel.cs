@@ -95,9 +95,7 @@ namespace Q50Remote.ViewModels
             ShowAutoPIPortal = new Command(async() =>
             {
                 Debug.WriteLine("Show auto pi portal");
-                string url = Application.Current.Properties.ContainsKey(nameof(AutoPiURL)) 
-                ? (string)Application.Current.Properties[(nameof(AutoPiURL))]
-                : "https://my.autopi.io/#/login";
+                string url = AutoPiURL ?? "https://my.autopi.io/#/login";
 
                 await Application.Current.MainPage.Navigation.PushAsync(new WebViewPage(url));
 
