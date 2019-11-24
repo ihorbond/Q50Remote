@@ -46,7 +46,6 @@
             IsVisible="{Binding IsLockTileVisible}"
             Text="Lock" />
         <Button
-            x:Name="UnlockBtn"
             Grid.Row="1"
             Grid.Column="1"
             BackgroundColor="DeepSkyBlue"
@@ -97,6 +96,7 @@
             BorderColor="Black"
             BorderWidth="1"
             Command="{Binding ShowCarLocation}"
+            IsEnabled="{Binding IsCarCommandRunning, Converter={converters:InverseBoolConverter}}"
             IsVisible="{Binding IsLocationTileVisible}"
             Text="Location" />
         <Button
@@ -106,6 +106,7 @@
             BorderColor="Black"
             BorderWidth="1"
             Command="{Binding ShowAutoPIPortal}"
+            IsEnabled="{Binding IsCarCommandRunning, Converter={converters:InverseBoolConverter}}"
             IsVisible="{Binding IsAutoPiTileVisible}"
             Text="AutoPI" />
         <Button
@@ -115,6 +116,7 @@
             BorderColor="Black"
             BorderWidth="1"
             Command="{Binding ShowSettings}"
+            IsEnabled="{Binding IsCarCommandRunning, Converter={converters:InverseBoolConverter}}"
             Text="Settings" />
 
         <ActivityIndicator

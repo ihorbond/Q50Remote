@@ -15,7 +15,7 @@ namespace Q50Remote.ViewModels
 {
     public class MainPageViewModel : SettingsPageViewModel
     {
-        private bool _isCarCommandRunning = false;
+        private bool _isCarCommandRunning;
         public bool IsCarCommandRunning
         {
             get => _isCarCommandRunning;
