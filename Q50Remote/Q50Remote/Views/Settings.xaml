@@ -12,24 +12,35 @@
         <vms:SettingsPageViewModel />
     </ContentPage.BindingContext>
 
-    <TableView Intent="Settings">
-        <TableRoot>
-            <TableSection Title="Menu Tiles" TextColor="DeepSkyBlue">
-                <SwitchCell On="{Binding IsLockTileVisible, Mode=TwoWay}" Text="Lock" />
-                <SwitchCell On="{Binding IsUnlockTileVisible, Mode=TwoWay}" Text="Unlock" />
-                <SwitchCell On="{Binding IsTrunkTileVisible, Mode=TwoWay}" Text="Trunk" />
-                <SwitchCell On="{Binding IsAlarmTileVisible, Mode=TwoWay}" Text="Alarm" />
-                <SwitchCell On="{Binding IsWindowsTileVisible, Mode=TwoWay}" Text="Windows" />
-                <SwitchCell On="{Binding IsLocationTileVisible, Mode=TwoWay}" Text="Location" />
-                <SwitchCell On="{Binding IsAutoPiTileVisible, Mode=TwoWay}" Text="AutoPI" />
-            </TableSection>
-            <TableSection Title="Other" TextColor="DeepSkyBlue">
-                <EntryCell
+    <ContentPage.Content>
+        
+        <StackLayout>
+            <TableView Intent="Settings">
+                <TableRoot>
+                    <TableSection Title="Menu Tiles" TextColor="DeepSkyBlue">
+                        <SwitchCell On="{Binding IsLockTileVisible, Mode=TwoWay}" Text="Lock" />
+                        <SwitchCell On="{Binding IsUnlockTileVisible, Mode=TwoWay}" Text="Unlock" />
+                        <SwitchCell On="{Binding IsTrunkTileVisible, Mode=TwoWay}" Text="Trunk" />
+                        <SwitchCell On="{Binding IsAlarmTileVisible, Mode=TwoWay}" Text="Alarm" />
+                        <SwitchCell On="{Binding IsWindowsTileVisible, Mode=TwoWay}" Text="Windows" />
+                        <SwitchCell On="{Binding IsLocationTileVisible, Mode=TwoWay}" Text="Location" />
+                        <SwitchCell On="{Binding IsAutoPiTileVisible, Mode=TwoWay}" Text="AutoPI" />
+                    </TableSection>
+                    <TableSection Title="Other" TextColor="DeepSkyBlue">
+                        <EntryCell
                     Label="AutoPI URL"
                     Placeholder="Enter URL"
                     Text="{Binding AutoPiURL, Mode=TwoWay}" />
-            </TableSection>
-        </TableRoot>
-    </TableView>
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+            
+            <Button Command="{Binding ShowAppInfoCommand}" Text="Show App Info" />
+            
+        </StackLayout>
+    </ContentPage.Content>
+
+    
+
 
 </ContentPage>
