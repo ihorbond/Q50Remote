@@ -51,28 +51,48 @@ namespace Q50Remote.ViewModels
 
         public PinCodePageViewModel(ContentPage view)
         {
+            GetExistingPinCode();
+
             _pinCodeEntry = view.FindByName<Entry>("PinCodeEntry");
             _pinCodeEntry.Unfocused += PinCodeEntry_Unfocused;
-
-            _pinCode = Preferences.Get("PIN", null);
             _isPinCodeSet = _pinCode != null;
             GreetingMsg = _isPinCodeSet ? "Enter PIN" : "Create PIN";
         }
 
-        private void PinCodeEntry_Unfocused(object sender, FocusEventArgs e)
+        private async void GetExistingPinCode()
         {
-            if (!_isPinCodeSet && PinCodeInput.Length == 4)
+            try
             {
-                Preferences.Set("PIN", PinCodeInput);
-                Application.Current.MainPage = new NavigationPage(new MainPage());
+                _pinCode = await SecureStorage.GetAsync("PIN");
             }
-            else
+            catch (Exception ex)
             {
-                if (_pinCode != PinCodeInput)
-                    IsErrorLabelVisible = _pinCode != PinCodeInput;
-                else
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+        private async void PinCodeEntry_Unfocused(object sender, FocusEventArgs e)
+        {
+            try
+            {
+                if (!_isPinCodeSet && PinCodeInput.Length == 4)
+                {
+                    await SecureStorage.SetAsync("PIN", PinCodeInput);
                     Application.Current.MainPage = new NavigationPage(new MainPage());
+                }
+                else
+                {
+                    if (_pinCode != PinCodeInput)
+                        IsErrorLabelVisible = _pinCode != PinCodeInput;
+                    else
+                        Application.Current.MainPage = new NavigationPage(new MainPage());
+                }
             }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            
         }
     }
 }
