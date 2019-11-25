@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Q50Remote.Views;
+using System;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,7 +12,7 @@ namespace Q50Remote
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new PinCodePage();
         }
 
         protected override void OnStart()
@@ -25,6 +27,8 @@ namespace Q50Remote
 
         protected override void OnResume()
         {
+            MainPage = new PinCodePage();
+
             // Handle when your app resumes
         }
     }

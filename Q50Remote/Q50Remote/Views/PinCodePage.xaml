@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Q50Remote.Views.PinCodePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    NavigationPage.HasNavigationBar="False"
+    mc:Ignorable="d">
+
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+            <Label Text="{Binding GreetingMsg}" />
+            <Entry
+                x:Name="PinCodeEntry"
+                IsPassword="True"
+                Keyboard="Numeric"
+                MaxLength="4"
+                Placeholder="Enter 4 digits"
+                Text="{Binding PinCodeInput}" />
+            <Label
+                IsVisible="{Binding IsErrorLabelVisible}"
+                Text="Invalid PIN"
+                TextColor="Red" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
