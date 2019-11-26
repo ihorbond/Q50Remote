@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Plugin.Fingerprint;
+using Plugin.Fingerprint.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
@@ -10,6 +12,7 @@ namespace Q50Remote.ViewModels
 {
     public class PinCodePageViewModel: BaseViewModel
     {
+        private const int PIN_CODE_LENGTH = 4;
         private Entry _pinCodeEntry { get; }
         private bool _isPinCodeSet { get; }
         private string _pinCode { get; set; }
@@ -32,7 +35,7 @@ namespace Q50Remote.ViewModels
                 _pinCodeInput = value;
                 OnPropertyChanged();
 
-                if(value.Length == 4)
+                if(value.Length == PIN_CODE_LENGTH)
                     _pinCodeEntry.Unfocus();
             }
         }
@@ -57,6 +60,30 @@ namespace Q50Remote.ViewModels
             _pinCodeEntry.Unfocused += PinCodeEntry_Unfocused;
             _isPinCodeSet = _pinCode != null;
             GreetingMsg = _isPinCodeSet ? "Enter PIN" : "Create PIN";
+
+            if (_isPinCodeSet)
+                AuthenticateViaFingerPrint();
+
+        }
+
+        private async void AuthenticateViaFingerPrint()
+        {
+            var authParams = new AuthenticationRequestConfiguration("Please scan fingerprint")
+            {
+                AllowAlternativeAuthentication = false,
+                UseDialog = true,
+                CancelTitle = "Use PIN"
+            };
+
+            FingerprintAuthenticationResult authResult = await CrossFingerprint.Current.AuthenticateAsync(authParams);
+            if(authResult.Authenticated)
+            {
+                Application.Current.MainPage = new NavigationPage(new MainPage());
+            }
+            else
+            {
+                Debug.WriteLine(authResult.Status, authResult.ErrorMessage);
+            }
         }
 
         private async void GetExistingPinCode()
@@ -75,17 +102,16 @@ namespace Q50Remote.ViewModels
         {
             try
             {
-                if (!_isPinCodeSet && PinCodeInput.Length == 4)
+                IsErrorLabelVisible = _isPinCodeSet && _pinCode != PinCodeInput || PinCodeInput.Length != PIN_CODE_LENGTH;
+
+                if (!_isPinCodeSet && PinCodeInput.Length == PIN_CODE_LENGTH)
                 {
                     await SecureStorage.SetAsync("PIN", PinCodeInput);
                     Application.Current.MainPage = new NavigationPage(new MainPage());
                 }
-                else
+                else if(!IsErrorLabelVisible)
                 {
-                    if (_pinCode != PinCodeInput)
-                        IsErrorLabelVisible = _pinCode != PinCodeInput;
-                    else
-                        Application.Current.MainPage = new NavigationPage(new MainPage());
+                    Application.Current.MainPage = new NavigationPage(new MainPage());
                 }
             }
             catch(Exception ex)
