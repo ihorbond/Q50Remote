@@ -22,14 +22,22 @@ namespace Q50Remote
 
         protected override void OnSleep()
         {
+            //ShowAuth();
             // Handle when your app sleeps
         }
 
         protected override void OnResume()
         {
-            MainPage = new PinCodePage();
+            //ShowAuth();
+
 
             // Handle when your app resumes
+        }
+
+        private async void ShowAuth()
+        {
+            await Current.MainPage.Navigation.PopToRootAsync();
+            MainPage = new PinCodePage();
         }
     }
 }

@@ -76,15 +76,19 @@ namespace Q50Remote.ViewModels
             ShowCarLocation = new Command(async() =>
             {
                 Debug.WriteLine("Show location");
+
+                CarLocationModel carLocation = _autoPiService.GetCarLocation().Result;
+                LatLanModel location = carLocation.Location;
+
                 if (Device.RuntimePlatform == Device.iOS)
                 {
                     // https://developer.apple.com/library/ios/featuredarticles/iPhoneURLScheme_Reference/MapLinks/MapLinks.html
-                    await Launcher.OpenAsync("http://maps.apple.com/?q=394+Pacific+Ave+San+Francisco+CA");
+                    await Launcher.OpenAsync("http://maps.apple.com/?q=25.7617,-80.191788");
                 }
                 else if (Device.RuntimePlatform == Device.Android)
                 {
                     // open the maps app directly
-                    await Launcher.OpenAsync("geo:0,0?q=394+Pacific+Ave+San+Francisco+CA");
+                    await Launcher.OpenAsync($"geo:0,0?q={location.Lat},{location.Lon}(Car)&z=8");
                 }
                 else if (Device.RuntimePlatform == Device.UWP)
                 {
@@ -95,7 +99,7 @@ namespace Q50Remote.ViewModels
             ShowAutoPIPortal = new Command(async() =>
             {
                 Debug.WriteLine("Show auto pi portal");
-                string url = AutoPiURL ?? "https://my.autopi.io/#/login";
+                string url = AutoPiURL ?? "https://my.autopi.io";
 
                 await Application.Current.MainPage.Navigation.PushAsync(new WebViewPage(url));
 

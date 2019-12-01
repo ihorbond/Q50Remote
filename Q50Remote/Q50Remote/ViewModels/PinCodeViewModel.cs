@@ -78,11 +78,13 @@ namespace Q50Remote.ViewModels
             FingerprintAuthenticationResult authResult = await CrossFingerprint.Current.AuthenticateAsync(authParams);
             if(authResult.Authenticated)
             {
+                PinCodeInput = _pinCode;
                 Application.Current.MainPage = new NavigationPage(new MainPage());
             }
             else
             {
                 Debug.WriteLine(authResult.Status, authResult.ErrorMessage);
+                _pinCodeEntry.Focus();
             }
         }
 
